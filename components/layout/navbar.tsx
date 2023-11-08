@@ -9,10 +9,9 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-import { CodeIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { CodeIcon } from "@radix-ui/react-icons";
 import ProfileDropdown from "./profile-dropdown";
 import { ModeToggle } from "./mode-toggle";
-import { Badge } from "../ui/badge";
 
 export default function Navbar() {
   const pathname = usePathname();

@@ -7,6 +7,7 @@ import { useChat } from "ai/react";
 import { Input } from "../ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { IconOpenAI } from "../ui/icons";
+import AnimatedText from "../animated-text-stream";
 
 export default function AIExplanation({
   snippets,
@@ -77,7 +78,9 @@ export default function AIExplanation({
                     </div>
                   )}
 
-                  <div className="mb-4 mt-1 ml-10">{m.content}</div>
+                  <div className="mb-4 mt-1 ml-10">
+                    <AnimatedText content={m.content} />
+                  </div>
                 </>
               )}
             </div>
