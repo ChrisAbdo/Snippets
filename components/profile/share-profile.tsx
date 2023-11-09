@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/popover";
 
 export function ShareProfile({ userName }: { userName: string | null }) {
-  const baseUrl = "http://localhost:3000/profile/";
+  const baseUrl = "https://code-snippets.vercel.app/profile/";
   return (
     <Popover>
       <PopoverTrigger asChild>

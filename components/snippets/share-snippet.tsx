@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/popover";
 
 export function ShareSnippet({ snippetId }: { snippetId: string }) {
-  const baseUrl = "http://localhost:3000/snippet/";
+  const baseUrl = "https://code-snippets.vercel.app/snippet/";
   return (
     <Popover>
       <PopoverTrigger asChild>
