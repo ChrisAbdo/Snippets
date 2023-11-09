@@ -8,6 +8,43 @@ import Link from "next/link";
 import AIExplanation from "@/components/snippets/ai-explanation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth-options";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CalendarIcon } from "@radix-ui/react-icons";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const post = await prisma.snippet.findUnique({
+    where: {
+      id: params.slug,
+    },
+    select: {
+      title: true,
+    },
+  });
+
+  const name = post?.title || "Manage your code snippets.";
+
+  return {
+    title: name,
+    openGraph: {
+      images: [`/api/og/${encodeURIComponent(name)}`],
+    },
+    twitter: {
+      title: name,
+      description: "View this code snippet on Snippets.",
+      card: "summary_large_image",
+      creator: "@abdo_eth",
+    },
+  };
+}
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const session = await getServerSession(authOptions);
@@ -16,11 +53,23 @@ export default async function Page({ params }: { params: { slug: string } }) {
     where: {
       id: params.slug,
     },
-
     include: {
       author: true,
     },
   });
+
+  const user = await prisma.user.findFirst({
+    where: {
+      name: {
+        equals: snippets?.author.name,
+        mode: "insensitive",
+      },
+    },
+    include: {
+      snippets: true,
+    },
+  });
+
   return (
     <div>
       <div className="mt-4 mb-4 md:flex md:items-center md:justify-between">
@@ -43,12 +92,44 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <h1 className="text-muted-foreground font-extralight text-sm">
               Snippet by{" "}
             </h1>
-            <Link
-              href={`/profile/${snippets?.author.name}`}
-              className="hover:underline"
-            >
-              {snippets?.author.name}
-            </Link>
+
+            <HoverCard>
+              <HoverCardTrigger asChild>
+                <Link
+                  href={`/profile/${snippets?.author.name}`}
+                  className="hover:underline"
+                >
+                  {snippets?.author.name}
+                </Link>
+              </HoverCardTrigger>
+              <HoverCardContent className="w-fit">
+                <div className="flex justify-between space-x-4">
+                  <Avatar>
+                    {/* @ts-ignore */}
+                    <AvatarImage src={snippets?.author.image} />
+                    <AvatarFallback>VC</AvatarFallback>
+                  </Avatar>
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-semibold">
+                      {snippets?.author.name}
+                    </h4>
+
+                    <p className="text-sm">
+                      {user?.snippets.length === 1
+                        ? `${user?.snippets.length} Snippet`
+                        : `${user?.snippets.length} Snippets`}
+                    </p>
+
+                    <div className="flex items-center pt-2">
+                      <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />{" "}
+                      <span className="text-xs text-muted-foreground">
+                        Joined December 2021
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
           </div>
 
           <Badge variant="outline" className="font-mono">

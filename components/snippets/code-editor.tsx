@@ -24,7 +24,6 @@ function CodeEditor({
   const [editorLoaded, setEditorLoaded] = useState(false);
 
   React.useEffect(() => {
-    // This will ensure editorLoaded is set after the component is mounted
     setEditorLoaded(true);
   }, []);
 
