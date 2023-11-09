@@ -33,11 +33,12 @@ export default function Navbar() {
         <div className="flex items-center gap-x-12">
           <Link href="/" className="flex items-center space-x-1">
             <CodeIcon className="h-[1.2rem] w-[1.2rem]" />
-            <span className="font-normal inline-block">Snippets</span>
+            <span className="font-semibold inline-block">Snippets</span>
           </Link>
           <div className="hidden md:flex md:gap-x-12">
             <Link
               href="/create"
+              prefetch={false}
               className={cn(
                 "transition-colors hover:text-foreground/80 text-sm font-normal",
                 pathname === "/create"

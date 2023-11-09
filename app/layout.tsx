@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/lib/theme-provider";
 import { GeistSans } from "geist/font";
 import { Container } from "@/components/layout/container";
 import { Toaster } from "sonner";
+import Footer from "@/components/layout/footer";
 
 const title = "Snippets - Manage your code snippets with ease.";
 const description =
@@ -45,6 +46,10 @@ export default function RootLayout({
           >
             <Navbar />
             <Container>{children}</Container>
+            {/* div wrapping the footer so that its at bottom of page */}
+            <div className="fixed w-full bottom-0">
+              <Footer />
+            </div>
             <Toaster position="top-center" richColors />
           </ThemeProvider>
         </body>
