@@ -20,11 +20,11 @@ import {
 
 const frameworks = [
   {
-    value: "javascript",
+    value: "jsx",
     label: "JavaScript",
   },
   {
-    value: "typescript",
+    value: "tsx",
     label: "TypeScript",
   },
   {

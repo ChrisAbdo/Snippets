@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import AceEditor from "react-ace";
 import { useTheme } from "next-themes";
 
-import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/mode-typescript";
+import "ace-builds/src-noconflict/mode-jsx";
+import "ace-builds/src-noconflict/mode-tsx";
 import "ace-builds/src-noconflict/mode-python";
+
 import "ace-builds/src-noconflict/theme-github";
-import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-tomorrow_night_bright";
 
 import { Skeleton } from "../ui/skeleton";
