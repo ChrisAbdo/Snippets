@@ -16,36 +16,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CalendarIcon } from "@radix-ui/react-icons";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const post = await prisma.snippet.findUnique({
-    where: {
-      id: params.slug,
-    },
-    select: {
-      title: true,
-    },
-  });
-
-  const name = post?.title || "Manage your code snippets.";
-
-  return {
-    title: name,
-    openGraph: {
-      images: [`/api/og/${encodeURIComponent(name)}`],
-    },
-    twitter: {
-      title: name,
-      description: "View this code snippet on Snippets.",
-      card: "summary_large_image",
-      creator: "@abdo_eth",
-    },
-  };
-}
-
 export default async function Page({ params }: { params: { slug: string } }) {
   const session = await getServerSession(authOptions);
 
