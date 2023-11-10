@@ -7,6 +7,8 @@ import ProfileSnippets from "@/components/snippets/display-profile-snippets";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { ShareProfile } from "@/components/profile/share-profile";
+import Cmdk from "@/components/layout/cmdk";
+import Navbar from "@/components/layout/navbar";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const user = await prisma.user.findFirst({
@@ -36,6 +38,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       author: true,
     },
   });
+
   return (
     <div>
       <div className="mx-auto max-w-7xl py-10">
